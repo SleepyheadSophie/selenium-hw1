@@ -1,6 +1,7 @@
-import org.junit.*;
 import static org.junit.Assert.*;
 import org.openqa.selenium.*;
+import org.junit.Test;
+
 
 
 
@@ -29,7 +30,7 @@ import org.openqa.selenium.*;
 
         @Test
         public void testSecond() {
-            driver.get("https://moscow-job.tinkoff.ru/");
+            driver.get(baseUrl);
             driver.findElement(By.cssSelector("input[name='fio']")).click();
             driver.findElement(By.cssSelector("input[name='fio']")).clear();
             driver.findElement(By.cssSelector("input[name='fio']")).sendKeys("Zxc");
@@ -56,9 +57,5 @@ import org.openqa.selenium.*;
                     .findElement(By.xpath("form div.Row__row_AjrJL:last-child div.Error__errorMessage_q8BBY")).getText());
         }
 
-        @Test
-        public void test() {
-        
-        }
     }
 
