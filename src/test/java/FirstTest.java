@@ -1,8 +1,7 @@
-import java.util.concurrent.TimeUnit;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
+
 
 
     public class FirstTest extends BaseRuner{
@@ -10,20 +9,20 @@ import org.openqa.selenium.chrome.ChromeDriver;
         @Test
         public void testFirst(){
             driver.get(baseUrl);
-            driver.findElement(By.name("fio")).click();
-            driver.findElement(By.name("email")).click();
-            driver.findElement(By.name("phone")).click();
-            driver.findElement(By.name("city")).click();
-            driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Поле обязательное'])[3]/following::div[8]")).click();
-            driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Пройдите обучение'])[1]/following::article[1]")).click();
+            driver.findElement(By.xpath("//input[@name='fio']")).click();
+            driver.findElement(By.xpath("//input[@name='email']")).click();
+            driver.findElement(By.xpath("//input[@name='phone']")).click();
+            driver.findElement(By.xpath("//input[@name='city']")).click();
+            driver.findElement(By.xpath("//form//div[@class='SelectItem__data_3u2ir SelectItem__placeholder_3_ypX SelectItem__isRequired_2J1mB SelectItem__data_noWrap_FIC1K']")).click();
+            driver.findElement(By.xpath("//input[@name='city']")).click();
             assertEquals("Поле обязательное", driver
-                    .findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Фамилия, имя и отчество'])[1]/following::div[3]")).getText());
+                    .findElement(By.xpath("//form//div[.//@name='fio']/following-sibling::div[@class='Error__errorMessage_q8BBY']")).getText());
             assertEquals("Поле обязательное", driver
-                    .findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Электронная почта'])[1]/following::div[3]")).getText());
+                    .findElement(By.xpath("//form//div[.//@name='email']/following-sibling::div[@class='Error__errorMessage_q8BBY']")).getText());
             assertEquals("Необходимо указать номер телефона", driver
-                    .findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Номер телефона'])[1]/following::div[3]")).getText());
+                    .findElement(By.xpath("//form//div[.//@name='phone']/following-sibling::div[@class='Error__errorMessage_q8BBY']")).getText());
             assertEquals("Поле обязательное", driver
-                    .findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Город'])[1]/following::div[3]")).getText());
+                    .findElement(By.xpath("//form//div[.//@name='city']/following-sibling::div[@class='Error__errorMessage_q8BBY']")).getText());
             assertEquals("Поле обязательное", driver
                     .findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Продавец-консультант'])[2]/following::div[1]")).getText());
         }
@@ -31,35 +30,35 @@ import org.openqa.selenium.chrome.ChromeDriver;
         @Test
         public void testSecond() {
             driver.get("https://moscow-job.tinkoff.ru/");
-            driver.findElement(By.name("fio")).click();
-            driver.findElement(By.name("fio")).clear();
-            driver.findElement(By.name("fio")).sendKeys("Zxc");
-            driver.findElement(By.name("email")).click();
-            driver.findElement(By.name("email")).clear();
-            driver.findElement(By.name("email")).sendKeys("qwe");
-            driver.findElement(By.name("phone")).click();
-            driver.findElement(By.name("phone")).clear();
-            driver.findElement(By.name("phone")).sendKeys("+7 (111)");
-            driver.findElement(By.name("city")).click();
-            driver.findElement(By.name("city")).clear();
-            driver.findElement(By.name("city")).sendKeys("city1");
-            driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Допустимо использовать только буквы русского, латинского алфавита и дефис'])[1]/following::div[8]")).click();
-            driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Пройдите обучение'])[1]/following::article[1]")).click();
+            driver.findElement(By.cssSelector("input[name='fio']")).click();
+            driver.findElement(By.cssSelector("input[name='fio']")).clear();
+            driver.findElement(By.cssSelector("input[name='fio']")).sendKeys("Zxc");
+            driver.findElement(By.cssSelector("input[name='email']")).click();
+            driver.findElement(By.cssSelector("input[name='email']")).clear();
+            driver.findElement(By.cssSelector("input[name='email']")).sendKeys("qwe");
+            driver.findElement(By.cssSelector("input[name='phone']")).click();
+            driver.findElement(By.cssSelector("input[name='phone']")).clear();
+            driver.findElement(By.cssSelector("input[name='phone']")).sendKeys("+7 (111)");
+            driver.findElement(By.cssSelector("input[name='city']")).click();
+            driver.findElement(By.cssSelector("input[name='city']")).clear();
+            driver.findElement(By.cssSelector("input[name='city']")).sendKeys("city1");
+            driver.findElement(By.cssSelector("div.SelectItem__data_3u2ir.SelectItem__placeholder_3_ypX.SelectItem__isRequired_2J1mB.SelectItem__data_noWrap_FIC1K")).click();
+            driver.findElement(By.cssSelector("div[name='form'] div.Header__header_3Teza")).click();
             assertEquals("Недостаточно информации. Введите фамилию, имя и отчество через пробел (Например: Иванов Иван Алексеевич)", driver
-                    .findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Фамилия, имя и отчество'])[1]/following::div[3]")).getText());
+                    .findElement(By.xpath("form div.Error__errorMessage_q8BBY")).getText());
             assertEquals("Введите корректный адрес эл. почты", driver
-                    .findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Электронная почта'])[1]/following::div[3]")).getText());
+                    .findElement(By.xpath("form div.Row__row_AjrJL:nth-child(2) div.Error__errorMessage_q8BBY")).getText());
             assertEquals("Код города/оператора должен начинаться с цифры 3, 4, 5, 6, 8, 9", driver
-                    .findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Номер телефона'])[1]/following::div[3]")).getText());
+                    .findElement(By.xpath("form div.Row__row_AjrJL:nth-child(3) div.Error__errorMessage_q8BBY")).getText());
             assertEquals("Допустимо использовать только буквы русского, латинского алфавита и дефис", driver
-                    .findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Город'])[1]/following::div[3]")).getText());
+                    .findElement(By.xpath("form div.Row__row_AjrJL:nth-child(4) div.Error__errorMessage_q8BBY")).getText());
             assertEquals("Поле обязательное", driver
-                    .findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Продавец-консультант'])[2]/following::div[1]")).getText());
+                    .findElement(By.xpath("form div.Row__row_AjrJL:last-child div.Error__errorMessage_q8BBY")).getText());
         }
 
-        @After
-        public void tearDown() {
-            driver.quit();
+        @Test
+        public void test() {
+        
         }
     }
 
